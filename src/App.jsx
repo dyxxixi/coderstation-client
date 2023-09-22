@@ -2,6 +2,8 @@ import { Layout } from 'antd';
 import NavHeader from './components/NavHeader';
 import PageFooter from './components/PageFooter';
 
+import RouteConfig from './router';
+
 const { Header, Content, Footer } = Layout;
 import './css/App.css'
 
@@ -11,7 +13,9 @@ function App() {
       <Header>
         <NavHeader />
       </Header>
-      <Content></Content>
+      <Content className='content'>
+        <RouteConfig />
+      </Content>
       <Footer>
         <PageFooter />
       </Footer>
