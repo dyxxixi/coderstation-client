@@ -1,0 +1,4 @@
+.ant-form-item-label>label {
+  width: 100px;
+  justify-content: flex-end;
+}

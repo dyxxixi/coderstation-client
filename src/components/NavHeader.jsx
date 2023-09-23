@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { Input, Space, Select, Button } from "antd";
+import { Input, Space, Select } from "antd";
+import LoginAvatar from "./LoginAvatar";
 
-function navHeader() {
+function navHeader({ handleLogin }) {
   return (
     <div className="headerContainer">
       {/* 头部logo */}
@@ -25,9 +26,9 @@ function navHeader() {
           <Input.Search placeholder="请输入要搜索的内容" size="large" allowClear enterButton='搜索' />
         </Space.Compact>
       </div>
-      {/* 登录按钮 */}
+      {/* 登录/头像 */}
       <div className="loginBtnContainer">
-        <Button type="primary" size='large'>注册/登录</Button>
+        <LoginAvatar handleLogin={handleLogin} />
       </div>
     </div>
   );
