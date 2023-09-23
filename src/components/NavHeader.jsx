@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { Input, Space, Select } from "antd";
 import LoginAvatar from "./LoginAvatar";
 
-function navHeader({ handleLogin }) {
+function navHeader({ handleLoginPopup }) {
   return (
     <div className="headerContainer">
       {/* 头部logo */}
@@ -28,7 +28,7 @@ function navHeader({ handleLogin }) {
       </div>
       {/* 登录/头像 */}
       <div className="loginBtnContainer">
-        <LoginAvatar handleLogin={handleLogin} />
+        <LoginAvatar handleLoginPopup={handleLoginPopup} />
       </div>
     </div>
   );

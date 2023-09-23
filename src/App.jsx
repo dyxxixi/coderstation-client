@@ -47,7 +47,7 @@ function App() {
   }
 
   // 处理登录注册
-  function handleLogin() {
+  function handleLoginPopup() {
     //打开弹框
     setIsModalOpen(true)
   }
@@ -56,7 +56,7 @@ function App() {
   return (
     <div className='app'>
       <Header>
-        <NavHeader handleLogin={handleLogin} />
+        <NavHeader handleLoginPopup={handleLoginPopup} />
       </Header>
       <Content className='content'>
         <RouteConfig />

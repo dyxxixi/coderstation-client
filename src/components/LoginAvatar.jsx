@@ -8,11 +8,11 @@ import styles from '../css/loginAvatar.module.css'
 
 import PropTypes from 'prop-types'
 LoginAvatar.propTypes = {
-  handleLogin: PropTypes.func
+  handleLoginPopup: PropTypes.func
 }
 
 // 该组件用于显示用户的头像，如果没登录，则显示注册登录按钮
-function LoginAvatar({ handleLogin }) {
+function LoginAvatar({ handleLoginPopup }) {
   const { isLogin, userInfo } = useSelector(state => state.user)
   let loginStatus = null
   const dispatch = useDispatch()
@@ -54,7 +54,7 @@ function LoginAvatar({ handleLogin }) {
   } else {
     // 未登录
     loginStatus = (
-      <Button type="primary" size='large' onClick={handleLogin}>登录/注册</Button>
+      <Button type="primary" size='large' onClick={handleLoginPopup}>登录/注册</Button>
     )
   }
 
