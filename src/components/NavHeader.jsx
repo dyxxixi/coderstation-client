@@ -7,7 +7,7 @@ function navHeader({ handleLoginPopup }) {
     <div className="headerContainer">
       {/* 头部logo */}
       <div className="logoContainer">
-        <div className="logo"></div>
+        <NavLink to='/' className="logo" />
       </div>
       {/* 头部导航 */}
       <nav className="navContainer">
