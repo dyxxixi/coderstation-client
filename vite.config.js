@@ -1,22 +1,23 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import unocss from 'unocss/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), unocss()],
   server: {
     proxy: {
       // '/res': 'https://coderstation-server.vercel.app',
       '/res': {
-        target: 'http://127.0.0.1:7001',
+        target: 'https://coderstation-server.vercel.app',
         changeOrigin: true
       },
       '/api': {
-        target: 'http://127.0.0.1:7001',
+        target: 'https://coderstation-server.vercel.app',
         changeOrigin: true
       },
       '/static': {
-        target: 'http://127.0.0.1:7001',
+        target: 'https://coderstation-server.vercel.app',
         changeOrigin: true
       }
     }
