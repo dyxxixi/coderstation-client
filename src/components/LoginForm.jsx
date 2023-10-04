@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Modal, Radio, Form, Input, Row, Col, Checkbox, Button, message } from 'antd';
 
 import styles from '../css/loginForm.module.css'
@@ -18,8 +18,7 @@ LoginForm.propTypes = {
 function LoginForm({ isModalOpen, closeModal }) {
 
   const [value, setValue] = useState(1)
-  const loginFormRef = useRef()
-  const registerFormRef = useRef()
+  const [form] = Form.useForm()
 
   const dispatch = useDispatch()
 
@@ -40,11 +39,12 @@ function LoginForm({ isModalOpen, closeModal }) {
 
   const [captcha, setCaptcha] = useState(null)
 
-
   useEffect(() => {
     // 接收验证码
     handleCaptchaClick()
   }, [isModalOpen])
+
+
 
   // 点击确定后
   function handleOk() {
@@ -170,7 +170,7 @@ function LoginForm({ isModalOpen, closeModal }) {
           name="basic1"
           autoComplete="off"
           onFinish={handleLogin}
-          ref={loginFormRef}
+          form={form}
         >
           <Form.Item
             label="登录账号"
@@ -261,7 +261,7 @@ function LoginForm({ isModalOpen, closeModal }) {
             >
               登录
             </Button>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" onClick={() => { form.resetFields(); setLoginInfo('') }}>
               重置
             </Button>
           </Form.Item>
@@ -275,7 +275,7 @@ function LoginForm({ isModalOpen, closeModal }) {
         <Form
           name="basic2"
           autoComplete="off"
-          ref={registerFormRef}
+          form={form}
           onFinish={handleRegister}
         >
           <Form.Item
@@ -350,7 +350,7 @@ function LoginForm({ isModalOpen, closeModal }) {
             >
               注册
             </Button>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" onClick={() => { form.resetFields(); setRegisterInfo('') }}>
               重置
             </Button>
           </Form.Item>
