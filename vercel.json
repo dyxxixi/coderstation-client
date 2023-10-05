@@ -1,22 +1,20 @@
 {
   "routes": [
     {
+      "src": "/res/:path*",
+      "dest": "https://coderstation-server-wfbgy.run.goorm.site/res/:path*"
+    },
+    {
+      "src": "/api/:path*",
+      "dest": "https://coderstation-server-wfbgy.run.goorm.site/api/:path*"
+    },
+    {
+      "src": "/static/:path*",
+      "dest": "https://coderstation-server-wfbgy.run.goorm.site/static/:path*"
+    },
+    {
       "src": "/(.*)",
       "dest": "/"
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/res/:path*",
-      "destination": "https://coderstation-server-wfbgy.run.goorm.site/res/:path*"
-    },
-    {
-      "source": "/api/:path*",
-      "destination": "https://coderstation-server-wfbgy.run.goorm.site/api/:path*"
-    },
-    {
-      "source": "/static/:path*",
-      "destination": "https://coderstation-server-wfbgy.run.goorm.site/static/:path*"
     }
   ]
 }
