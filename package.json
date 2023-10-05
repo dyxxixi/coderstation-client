@@ -10,16 +10,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/compatible": "^5.1.2",
+    "@ant-design/icons": "^5.2.6",
     "@reduxjs/toolkit": "^1.9.5",
+    "@toast-ui/editor": "^3.2.2",
+    "@toast-ui/react-editor": "^3.2.3",
     "antd": "^5.9.2",
     "axios": "^1.5.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.2",
-    "react-router-dom": "^6.16.0"
+    "react-router-dom": "^6.16.0",
+    "unocss": "^0.56.4"
   },
   "devDependencies": {
+    "@iconify-json/emojione": "^1.1.7",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",

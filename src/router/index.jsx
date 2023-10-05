@@ -4,6 +4,8 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Issues from "../pages/Issues";
 import Books from "../pages/Books";
 import Interviews from "../pages/Interviews";
+import AddIssue from '../pages/AddIssue';
+import IssueDetail from '../pages/IssueDetail';
 
 function RouteConfig() {
   return (
@@ -11,6 +13,8 @@ function RouteConfig() {
       <Route path='/issues' element={<Issues />} />
       <Route path='/books' element={<Books />} />
       <Route path='/interviews' element={<Interviews />} />
+      <Route path='/addIssue' element={<AddIssue />} />
+      <Route path='/issues/:id' element={<IssueDetail />} />
       <Route path='/' element={<Navigate replace to='/issues' />} />
     </Routes>
   );
