@@ -9,15 +9,15 @@ export default defineConfig({
     proxy: {
       // '本地': 'http://localhost:7001', '外部': 'https://coderstation-server-wfbgy.run.goorm.site',
       '/res': {
-        target: 'http://localhost:7001',
+        target: 'https://coderstation-server-wfbgy.run.goorm.site',
         changeOrigin: true
       },
       '/api': {
-        target: 'http://localhost:7001',
+        target: 'https://coderstation-server-wfbgy.run.goorm.site',
         changeOrigin: true
       },
       '/static': {
-        target: 'http://localhost:7001',
+        target: 'https://coderstation-server-wfbgy.run.goorm.site',
         changeOrigin: true
       }
     }
