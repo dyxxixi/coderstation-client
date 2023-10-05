@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "routes": [
     {
       "src": "/res/:path*",
@@ -16,24 +15,6 @@
     {
       "src": "/(.*)",
       "dest": "/"
-=======
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/"
-    },
-    {
-      "source": "/res/:path*",
-      "destination": "https://coderstation-server-wfbgy.run.goorm.site/res/:path*"
-    },
-    {
-      "source": "/api/:path*",
-      "destination": "https://coderstation-server-wfbgy.run.goorm.site/api/:path*"
-    },
-    {
-      "source": "/static/:path*",
-      "destination": "https://coderstation-server-wfbgy.run.goorm.site/static/:path*"
->>>>>>> aa3018e24e12a4532ba5f57bf4b16b9384b2b4a0
     }
   ]
 }
