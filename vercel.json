@@ -1,11 +1,9 @@
 {
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
-  ],
   "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    },
     {
       "source": "/res/:path*",
       "destination": "https://coderstation-server-wfbgy.run.goorm.site/res/:path*"
