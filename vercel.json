@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/res/:path*",
+      "destination": "https://coderstation-server-wfbgy.run.goorm.site/res/:path*"
+    },
+    {
+      "source": "/api/:path*",
+      "destination": "https://coderstation-server-wfbgy.run.goorm.site/api/:path*"
+    },
+    {
+      "source": "/static/:path*",
+      "destination": "https://coderstation-server-wfbgy.run.goorm.site/static/:path*"
+    }
+  ]
+}
