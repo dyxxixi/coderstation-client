@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react(), unocss()],
   server: {
     proxy: {
-      // '本地': 'http://localhost:7001', '外部': 'https://coderstation-server-wfbgy.run.goorm.site',
+      // '本地': 'http://localhost:7001', '外部': 'https://coderstation-api-dyxxixi.koyeb.app',
       '/res': {
         target: 'https://coderstation-api-dyxxixi.koyeb.app',
         changeOrigin: true
