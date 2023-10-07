@@ -10,6 +10,3 @@
   from = "/static/*"
   to = "https://coderstation-api-dyxxixi.koyeb.app/static/:splat"
 
-[[redirects]]
-  from = "/*"
-  to = "index.html"
