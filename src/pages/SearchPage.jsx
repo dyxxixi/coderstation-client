@@ -1,58 +1,63 @@
-import styles from '../css/Issue.module.css'
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
-import IssueItem from '../components/IssueItem';
 import AddIssueBtn from '../components/AddIssueBtn';
 import Recommend from '../components/Recommend';
 import ScoreRank from '../components/ScoreRank';
-import TypeSelect from '../components/TypeSelect';
-import { useState, useEffect } from 'react';
+import SearchResultItem from '../components/SearchResultItem';
+import styles from '../css/SearchPage.module.css'
 import { getIssueByPageApi } from '../api/issue';
-import { Pagination } from 'antd'
-import { useSelector } from 'react-redux';
+import { Pagination } from 'antd';
 
-function Issues() {
-  // 用于存储获取到的数据列表
-  const [issueInfo, setIssueInfo] = useState([])
+// 搜索结果页
+function SearchPage() {
+  const location = useLocation()
+  // 存储搜索结果
+  const [searchResult, setSearchResult] = useState([])
   // 分页信息
   const [pageInfo, setPageInfo] = useState({
     current: 1, // 当前页
     pageSize: 10, // 每页条数
     total: 0 // 总条数
   })
-  const { issueTypeId } = useSelector(state => state.type)
 
   useEffect(() => {
-    async function fetchData() {
-      let pageParam = {
+    async function fetchData({ value, searchType }) {
+      let searchParams = {
         current: pageInfo.current,
         pageSize: pageInfo.pageSize,
         issueStatus: true
       }
-      if (issueTypeId !== 'all') {
-        // 重置为第一页
-        // pageParam.current = 1
-
-        // 需要按照typeId分类
-        pageParam.typeId = issueTypeId
+      switch (searchType) {
+        case 'issue': {
+          // 搜索问答
+          searchParams.issueTitle = value
+          const { data } = await getIssueByPageApi(searchParams)
+          // 更新分页信息
+          setPageInfo({ ...pageInfo, total: data.count })
+          // 存储数据列表
+          setSearchResult(data.data)
+          break
+        }
+        case 'book': {
+          // 搜索问答
+          break
+        }
       }
-      //  {currentPage: 1, eachPage: 15, count: 20, totalPage: 2, data: Array(15)}
-      const { data } = await getIssueByPageApi(pageParam)
-      // 更新分页信息
-      setPageInfo({ ...pageInfo, total: data.count })
-      // 存储数据列表
-      setIssueInfo(data.data)
     }
-    fetchData()
-  }, [pageInfo.current, pageInfo.pageSize, issueTypeId])
+    if (location.state) {
+      fetchData(location.state)
+    }
+  }, [location.state])
 
-  let issueList = []
-  issueInfo.forEach((item, index) => {
-    issueList.push(<IssueItem key={index} issueInfo={item} />)
+  let searchList = []
+  searchResult.forEach((item, index) => {
+    searchList.push(<SearchResultItem key={index} info={item} />)
   })
 
   /**
-   * 处理翻页的回调函数
-   */
+ * 处理翻页的回调函数
+ */
   function handlePageChange(current, pageSize) {
     setPageInfo({
       current,
@@ -63,18 +68,15 @@ function Issues() {
   return (
     <div>
       {/* 上面的头部 */}
-      <PageHeader title='问答列表' >
-        {/* 分类选择  */}
-        <TypeSelect />
-      </PageHeader>
+      <PageHeader title='搜索结果' />
       {/* 下面的列表内容区域 */}
-      <div className={styles.issueContainer}>
+      <div className={styles.searchPageContainer}>
         {/* 左边区域 */}
         <div className={styles.leftSide}>
-          {issueList}
+          {searchList}
           <div className="paginationContainer">
             {
-              issueList.length > 0
+              searchList.length > 0
                 ? <Pagination
                   showQuickJumper
                   defaultCurrent={1}
@@ -82,11 +84,10 @@ function Issues() {
                   pageSizeOptions={[5, 10, 15]}
                   showSizeChanger
                 />
-                : <div className={styles.noIssue}>
-                  有问题就来 CoderStation !
+                : <div className={styles.noResult}>
+                  空
                 </div>
             }
-
           </div>
         </div>
         {/* 右边区域 */}
@@ -104,4 +105,4 @@ function Issues() {
   );
 }
 
-export default Issues;
+export default SearchPage;

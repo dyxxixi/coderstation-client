@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const service = axios.create({
-  timeout: 5000
+  timeout: 10000
 })
 
 // 请求拦截
