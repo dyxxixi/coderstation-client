@@ -9,15 +9,15 @@ export default defineConfig({
     proxy: {
       // '本地': 'http://localhost:7001', '外部': 'https://coderstation-server-wfbgy.run.goorm.site',
       '/res': {
-        target: 'https://coderstation-server-wfbgy.run.goorm.site',
+        target: 'https://coderstation-api-dyxxixi.koyeb.app',
         changeOrigin: true
       },
       '/api': {
-        target: 'https://coderstation-server-wfbgy.run.goorm.site',
+        target: 'https://coderstation-api-dyxxixi.koyeb.app',
         changeOrigin: true
       },
       '/static': {
-        target: 'https://coderstation-server-wfbgy.run.goorm.site',
+        target: 'https://coderstation-api-dyxxixi.koyeb.app',
         changeOrigin: true
       }
     }
