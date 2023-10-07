@@ -2,15 +2,15 @@
   "rewrites": [
     {
       "source": "/res/:path*",
-      "destination": "https://coderstation-server-wfbgy.run.goorm.site/res/:path*"
+      "destination": "https://coderstation-api-dyxxixi.koyeb.app/res/:path*"
     },
     {
       "source": "/api/:path*",
-      "destination": "https://coderstation-server-wfbgy.run.goorm.site/api/:path*"
+      "destination": "https://coderstation-api-dyxxixi.koyeb.app/api/:path*"
     },
     {
       "source": "/static/:path*",
-      "destination": "https://coderstation-server-wfbgy.run.goorm.site/static/:path*"
+      "destination": "https://coderstation-api-dyxxixi.koyeb.app/static/:path*"
     },
     {
       "source": "/(.*)",
