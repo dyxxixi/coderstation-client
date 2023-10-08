@@ -6,7 +6,7 @@ import PageFooter from './components/PageFooter';
 import LoginForm from './components/LoginForm';
 import { getInfoApi, getUserByIdApi } from './api/user';
 
-import RouteConfig from './router';
+import RouteBefore from './router/RouteBefore';
 
 const { Header, Content, Footer } = Layout;
 import './css/App.css'
@@ -59,7 +59,7 @@ function App() {
         <NavHeader handleLoginPopup={handleLoginPopup} />
       </Header>
       <Content className='content'>
-        <RouteConfig />
+        <RouteBefore />
       </Content>
       <Footer>
         <PageFooter />

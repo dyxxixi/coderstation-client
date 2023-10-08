@@ -71,6 +71,7 @@
   /* height: 5000px; */
   background-color: #fff;
   margin: 85px auto 0 auto;
+  min-height: 500px;
 }
 
 .footer {
