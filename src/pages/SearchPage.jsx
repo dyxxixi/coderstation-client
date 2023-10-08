@@ -7,6 +7,7 @@ import ScoreRank from '../components/ScoreRank';
 import SearchResultItem from '../components/SearchResultItem';
 import styles from '../css/SearchPage.module.css'
 import { getIssueByPageApi } from '../api/issue';
+import { getBookByPageApi } from '../api/book';
 import { Pagination } from 'antd';
 
 // 搜索结果页
@@ -17,7 +18,7 @@ function SearchPage() {
   // 分页信息
   const [pageInfo, setPageInfo] = useState({
     current: 1, // 当前页
-    pageSize: 10, // 每页条数
+    pageSize: 5, // 每页条数
     total: 0 // 总条数
   })
 
@@ -41,6 +42,10 @@ function SearchPage() {
         }
         case 'book': {
           // 搜索问答
+          searchParams.bookTitle = value
+          const { data } = await getBookByPageApi(searchParams)
+          setPageInfo({ ...pageInfo, total: data.count })
+          setSearchResult(data.data)
           break
         }
       }
@@ -48,7 +53,7 @@ function SearchPage() {
     if (location.state) {
       fetchData(location.state)
     }
-  }, [location.state])
+  }, [location.state, pageInfo.current])
 
   let searchList = []
   searchResult.forEach((item, index) => {
@@ -81,8 +86,6 @@ function SearchPage() {
                   showQuickJumper
                   defaultCurrent={1}
                   {...pageInfo} onChange={handlePageChange}
-                  pageSizeOptions={[5, 10, 15]}
-                  showSizeChanger
                 />
                 : <div className={styles.noResult}>
                   空

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTypesList, setIssueTypeId } from '../redux/typeSlice';
+import { getTypesList, updateIssueTypeId, updateBookTypeId } from '../redux/typeSlice';
 import { Tag } from 'antd';
 
 // 类型选择组件
@@ -22,7 +22,7 @@ function TypeSelect() {
           value='all'
           key='all'
           style={{ cursor: 'pointer' }}
-          onClick={() => dispatch(setIssueTypeId('all'))}
+          onClick={() => changeType('all')}
         >
           全部
         </Tag>)
@@ -33,7 +33,7 @@ function TypeSelect() {
             value={e._id}
             key={e._id}
             style={{ cursor: 'pointer' }}
-            onClick={() => dispatch(setIssueTypeId(e._id))}
+            onClick={() => changeType(e._id)}
           >
             {e.typeName}
           </Tag>
@@ -42,6 +42,14 @@ function TypeSelect() {
       setTagContainer(arr)
     }
   }, [typesList])
+
+  function changeType(typeId) {
+    if (location.pathname === '/issues') {
+      dispatch(updateIssueTypeId(typeId))
+    } else if (location.pathname === '/books') {
+      dispatch(updateBookTypeId(typeId))
+    }
+  }
 
   return (
     <div>

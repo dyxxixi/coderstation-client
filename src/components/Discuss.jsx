@@ -1,14 +1,15 @@
 import { useRef, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Comment } from '@ant-design/compatible';
-import { Avatar, Button, Form, List, Tooltip, message, Pagination } from 'antd';
+import { Avatar, Button, Form, List, Tooltip, message, Pagination, Input } from 'antd';
 import { UserOutlined } from '@ant-design/icons'
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
-import { addCommentApi, getIssueCommentByIdApi } from '../api/comment';
+import { addCommentApi, getIssueCommentByIdApi, getBookCommentByIdApi } from '../api/comment';
 import { getUserByIdApi } from '../api/user';
 import { formatDate } from '../utils';
 import { updateIssueApi } from '../api/issue';
+import { updateBookApi } from '../api/book';
 import { updateUserInfoAsync } from '../redux/userSlice';
 import styles from '../css/Discuss.module.css'
 
@@ -30,6 +31,7 @@ function Discuss({ commentType, targetId, issueInfo, bookInfo }) {
     total: 0 // 总条数
   })
   const [refresh, setRefresh] = useState(false)
+  const [value, setValue] = useState('');
   const dispatch = useDispatch()
 
   //根据登录状态进行头像处理
@@ -52,6 +54,11 @@ function Discuss({ commentType, targetId, issueInfo, bookInfo }) {
         data = result.data
       } else if (commentType === 2) {
         // 传递过来的是书籍 id ,需要获取该书籍 id 所对应的评论
+        const result = await getBookCommentByIdApi(targetId, {
+          current: pageInfo.current,
+          pageSize: pageInfo.pageSize
+        })
+        data = result.data
       }
       for (const item of data.data) {
         const { data } = await getUserByIdApi(item.userId)
@@ -63,7 +70,9 @@ function Discuss({ commentType, targetId, issueInfo, bookInfo }) {
       // 更新分页数据
       setPageInfo({ ...pageInfo, total: data.count })
     }
-    fetchCommentList()
+    if (targetId) {
+      fetchCommentList();
+    }
   }, [targetId, pageInfo.current, refresh])
 
   // 处理添加评论
@@ -77,6 +86,7 @@ function Discuss({ commentType, targetId, issueInfo, bookInfo }) {
       }
     } else if (commentType === 2) {
       // 说明是新增书籍的评论
+      newComment = value;
     }
     if (!newComment) {
       message.warning('请输入评论内容')
@@ -88,27 +98,43 @@ function Discuss({ commentType, targetId, issueInfo, bookInfo }) {
       typeId: issueInfo ? issueInfo.typeId : bookInfo.typeId,
       commentContent: newComment,
       commentType: commentType,
-      bookId: null,
-      issueId: targetId
+      bookId: bookInfo?._id,
+      issueId: issueInfo?._id
     })
-    message.success('评论成功，积分+4分')
+
+    if (commentType === 1) {
+      // 问答评论数 +1
+      updateIssueApi(targetId, {
+        commentNumber: ++issueInfo.commentNumber
+      })
+      // 增加仓库对应用户积分的变化
+      dispatch(updateUserInfoAsync({
+        userId: userInfo._id,
+        newInfo: {
+          points: userInfo.points + 4
+        }
+      }))
+      message.success("评论添加成功，积分+4");
+      // 清空评论框
+      editorRef.current.getInstance().setHTML("");
+    } else if (commentType === 2) {
+      // 书籍评论数 +1
+      updateBookApi(targetId, {
+        commentNumber: ++bookInfo.commentNumber
+      })
+      // 增加仓库对应用户积分的变化
+      dispatch(updateUserInfoAsync({
+        userId: userInfo._id,
+        newInfo: {
+          points: userInfo.points + 2
+        }
+      }))
+      message.success("评论添加成功，积分+2");
+      // 清空评论框
+      setValue("");
+    }
     // 刷新评论
-    setRefresh(!refresh)
-    // 清空编辑评论区
-    editorRef.current.getInstance().setHTML('')
-
-    // 更新该问答评论数 
-    updateIssueApi(targetId, {
-      commentNumber: issueInfo ? ++issueInfo.commentNumber : ++bookInfo.commentNumber
-    })
-
-    // 更新积分的变化
-    dispatch(updateUserInfoAsync({
-      userId: userInfo._id,
-      newInfo: {
-        points: userInfo.points + 4
-      }
-    }))
+    setRefresh(!refresh);
   }
 
   /**
@@ -129,15 +155,26 @@ function Discuss({ commentType, targetId, issueInfo, bookInfo }) {
         content={
           <>
             <Form.Item>
-              <Editor
-                initialValue=""
-                previewStyle="vertical"
-                height="270px"
-                initialEditType="wysiwyg"
-                useCommandShortcut={true}
-                language='zh-CN'
-                ref={editorRef}
-              />
+              {
+                commentType === 1
+                  ?
+                  <Editor
+                    initialValue=""
+                    previewStyle="vertical"
+                    height="270px"
+                    initialEditType="wysiwyg"
+                    useCommandShortcut={true}
+                    language='zh-CN'
+                    ref={editorRef}
+                  />
+                  :
+                  <Input.TextArea
+                    rows={4}
+                    placeholder={isLogin ? "" : "请登录后评论..."}
+                    value={value}
+                    onChange={e => setValue(e.target.value)}
+                  />
+              }
             </Form.Item>
             <Form.Item>
               <Button

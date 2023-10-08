@@ -23,22 +23,29 @@ function Issues() {
 
   useEffect(() => {
     async function fetchData() {
-      let pageParam = {
+      let pageParams = {
         current: pageInfo.current,
         pageSize: pageInfo.pageSize,
         issueStatus: true
       }
       if (issueTypeId !== 'all') {
-        // 重置为第一页
-        // pageParam.current = 1
-
         // 需要按照typeId分类
-        pageParam.typeId = issueTypeId
+        pageParams.typeId = issueTypeId
+        
+        // 通过检测total值判断 是否为搜索结果里的页面跳转
+        if (pageInfo.total) {
+          // 重置为第一页
+          pageParams.current = 1
+        }
       }
       //  {currentPage: 1, eachPage: 15, count: 20, totalPage: 2, data: Array(15)}
-      const { data } = await getIssueByPageApi(pageParam)
+      const { data } = await getIssueByPageApi(pageParams)
       // 更新分页信息
-      setPageInfo({ ...pageInfo, total: data.count })
+      setPageInfo({
+        current: data.currentPage,
+        pageSize: data.eachPage,
+        total: data.count
+      })
       // 存储数据列表
       setIssueInfo(data.data)
     }

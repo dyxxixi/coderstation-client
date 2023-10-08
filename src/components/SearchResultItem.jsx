@@ -1,4 +1,5 @@
 import IssueItem from './IssueItem';
+import BookItem from './BookItem';
 
 import PropTypes from 'prop-types'
 SearchResultItem.propTypes = {
@@ -17,7 +18,7 @@ function SearchResultItem({ info }) {
           ?
           <IssueItem issueInfo={info} />
           :
-          null
+          <BookItem bookInfo={info} />
       }
     </div>
   );
