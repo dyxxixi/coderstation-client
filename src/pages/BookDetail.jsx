@@ -4,7 +4,7 @@ import Discuss from "../components/Discuss"
 import { Image, message, Modal } from 'antd'
 import { useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import { updateUserInfo } from "../redux/userSlice"
+import { updateStoreUserInfo } from "../redux/userSlice"
 import { getBookByIdApi, updateBookApi } from "../api/book"
 import { editUserApi } from "../api/user"
 import styles from "../css/BookDetail.module.css"
@@ -49,7 +49,7 @@ function BookDetail() {
         points: userInfo.points - bookInfo.requirePoints
       });
       // 本地仓库也需要更新
-      dispatch(updateUserInfo({
+      dispatch(updateStoreUserInfo({
         points: userInfo.points - bookInfo.requirePoints
       }))
       window.open(`${bookInfo.downloadLink}`);

@@ -21,6 +21,7 @@ function LoginAvatar({ handleLoginPopup }) {
   function handleListClick(item) {
     if (item === '个人中心') {
       // 跳转到个人中心
+      navigate('/personal')
     } else {
       // 退出登录
       // 清除token
@@ -47,7 +48,7 @@ function LoginAvatar({ handleLoginPopup }) {
     loginStatus = (
       <Popover content={content}>
         <div className={styles.avatarContainer}>
-          <Avatar src={<Image src={userInfo?.avatar} preview={false} />} size='large' />
+          <Avatar src={<Image src={userInfo?.avatar} preview={false} width={40} height={40} />} size='large' />
         </div>
       </Popover>
     )

@@ -68,3 +68,17 @@ export function editUserApi(userId, newUserInfo) {
     data: newUserInfo
   })
 }
+
+/**
+ * 根据用户 id 确认密码是否正确
+ */
+
+export function checkPasswordIsRight(userId, loginPwd) {
+  return request("/api/user/passwordcheck", {
+    method: "POST",
+    data: {
+      userId,
+      loginPwd,
+    },
+  });
+}

@@ -10,7 +10,7 @@ import { getUserByIdApi } from '../api/user';
 import { formatDate } from '../utils';
 import { updateIssueApi } from '../api/issue';
 import { updateBookApi } from '../api/book';
-import { updateUserInfoAsync } from '../redux/userSlice';
+import { updateUserInfo } from '../redux/userSlice';
 import styles from '../css/Discuss.module.css'
 
 import PropTypes from 'prop-types'
@@ -108,7 +108,7 @@ function Discuss({ commentType, targetId, issueInfo, bookInfo }) {
         commentNumber: ++issueInfo.commentNumber
       })
       // 增加仓库对应用户积分的变化
-      dispatch(updateUserInfoAsync({
+      dispatch(updateUserInfo({
         userId: userInfo._id,
         newInfo: {
           points: userInfo.points + 4
@@ -123,7 +123,7 @@ function Discuss({ commentType, targetId, issueInfo, bookInfo }) {
         commentNumber: ++bookInfo.commentNumber
       })
       // 增加仓库对应用户积分的变化
-      dispatch(updateUserInfoAsync({
+      dispatch(updateUserInfo({
         userId: userInfo._id,
         newInfo: {
           points: userInfo.points + 2

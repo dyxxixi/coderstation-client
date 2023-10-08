@@ -5,7 +5,7 @@ import styles from '../css/loginForm.module.css'
 
 import { getCaptchaApi, userIsExitApi, registerUserApi, loginApi, getUserByIdApi } from '../api/user'
 
-import { initUserInfo, changeUserStatus } from '../redux/userSlice';
+import { initUserInfo, changeUserStatus, updateUserInfo } from '../redux/userSlice';
 import { useDispatch } from 'react-redux'
 
 
@@ -80,6 +80,15 @@ function LoginForm({ isModalOpen, closeModal }) {
         // 存仓库 和注册情况一样
         dispatch(initUserInfo(result.data))
         dispatch(changeUserStatus(true))
+
+        // 改变登录时间
+        const newDate = new Date().getTime()
+        dispatch(updateUserInfo({
+          userId: result.data._id,
+          newInfo: {
+            lastLoginDate: newDate
+          }
+        }))
         handleCancel()
       }
 
@@ -261,7 +270,7 @@ function LoginForm({ isModalOpen, closeModal }) {
             >
               登录
             </Button>
-            <Button type="primary" onClick={() => { form.resetFields(); setLoginInfo('') }}>
+            <Button type="default" onClick={() => { form.resetFields(); setLoginInfo('') }}>
               重置
             </Button>
           </Form.Item>
@@ -350,7 +359,7 @@ function LoginForm({ isModalOpen, closeModal }) {
             >
               注册
             </Button>
-            <Button type="primary" onClick={() => { form.resetFields(); setRegisterInfo('') }}>
+            <Button type="default" onClick={() => { form.resetFields(); setRegisterInfo('') }}>
               重置
             </Button>
           </Form.Item>

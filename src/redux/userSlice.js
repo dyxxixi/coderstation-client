@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { editUserApi } from '../api/user';
 
-export const updateUserInfoAsync = createAsyncThunk(
-  'user/updateUserInfoAsync',
+export const updateUserInfo = createAsyncThunk(
+  'user/updateUserInfo',
   async (payload, thunkApi) => {
     editUserApi(payload.userId, payload.newInfo)
-    thunkApi.dispatch(updateUserInfo(payload.newInfo))
+    thunkApi.dispatch(updateStoreUserInfo(payload.newInfo))
   }
 )
 
@@ -29,7 +29,7 @@ export const userSlice = createSlice({
       state.userInfo = {}
     },
     // 更新用户信息
-    updateUserInfo: (state, { payload }) => {
+    updateStoreUserInfo: (state, { payload }) => {
       // 个人中心那也会用到 所以可能更新多个属性
       for (let key in payload) {
         state.userInfo[key] = payload[key]
@@ -39,5 +39,5 @@ export const userSlice = createSlice({
 })
 
 
-export const { initUserInfo, changeUserStatus, clearUserInfo, updateUserInfo } = userSlice.actions
+export const { initUserInfo, changeUserStatus, clearUserInfo, updateStoreUserInfo } = userSlice.actions
 export default userSlice.reducer
