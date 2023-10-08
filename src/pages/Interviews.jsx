@@ -4,7 +4,7 @@ import PageHeader from '../components/PageHeader'
 import { useSelector, useDispatch } from 'react-redux';
 import { getInterviewTitleList } from '../redux/interviewSlice';
 import { getTypesList } from '../redux/typeSlice';
-import { Tree, BackTop } from 'antd';
+import { Tree, FloatButton } from 'antd';
 import { getInterviewByIdApi } from '../api/interview';
 
 function Interviews() {
@@ -85,7 +85,7 @@ function Interviews() {
           {interviewRightSide}
         </div>
       </div>
-      <BackTop />
+      <FloatButton.BackTop />
     </div>
   )
 }
