@@ -313,7 +313,7 @@ function LoginForm({ isModalOpen, closeModal }) {
           >
             <Input
               placeholder="请输入昵称，不填写默认为新用户xxx"
-              value={registerInfo.nickname}
+              value={registerInfo?.nickname}
               onChange={(e) => updateInfo(registerInfo, e.target.value, 'nickname', setRegisterInfo)}
             />
           </Form.Item>

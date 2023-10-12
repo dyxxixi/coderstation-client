@@ -324,7 +324,7 @@ function Personal() {
                         }} />
                         <PersonalInfoItem info={{
                             itemName: "用户昵称",
-                            itemValue: userInfo.nickname,
+                            itemValue: userInfo?.nickname,
                         }} />
                         <PersonalInfoItem info={{
                             itemName: "用户积分",

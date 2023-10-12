@@ -63,7 +63,7 @@ function IssueItem({ issueInfo }) {
           </div>
           <div className={styles.right}>
             <span>
-              <Tag color='volcano'>{userInfo.nickname}</Tag>
+              <Tag color='volcano'>{userInfo?.nickname}</Tag>
               {formatDate(issueInfo.issueDate, 'year')}
             </span>
           </div>

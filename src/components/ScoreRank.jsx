@@ -24,7 +24,7 @@ function ScoreRank() {
         key={item._id}
         rank={index + 1}
         avatar={item.avatar}
-        nickname={item.nickname}
+        nickname={item?.nickname}
         points={item.points}
       />
     )
