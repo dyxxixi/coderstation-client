@@ -6,7 +6,7 @@ import { Alert } from "antd";
 function RouteBefore() {
   const currentPath = RouteBeforeConfig.filter(item => item.path === location.pathname)[0]
 
-  if (currentPath.needLogin && !localStorage.getItem('userToken')) {
+  if (currentPath?.needLogin && !localStorage.getItem('userToken')) {
     return (
       <Alert
         message="请先登录！登录后才能访问此页面"

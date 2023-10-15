@@ -37,7 +37,7 @@ function Discuss({ commentType, targetId, issueInfo, bookInfo }) {
   //根据登录状态进行头像处理
   let avatar = null
   if (isLogin) {
-    avatar = (<Avatar src={userInfo.avatar} />)
+    avatar = (<Avatar src={userInfo?.avatar} />)
   } else {
     avatar = (<Avatar icon={<UserOutlined />} />)
   }
@@ -196,7 +196,7 @@ function Discuss({ commentType, targetId, issueInfo, bookInfo }) {
           dataSource={commentList}
           renderItem={(item) => (
             <Comment
-              avatar={<Avatar src={item.userInfo.avatar} />}
+              avatar={<Avatar src={item.userInfo?.avatar} />}
               content={
                 <div dangerouslySetInnerHTML={{ __html: item.commentContent }} />
               }

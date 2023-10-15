@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getIssueByIdAPI } from '../api/issue';
+import { getIssueByIdAPI, updateIssueApi } from '../api/issue';
 import { useParams } from 'react-router-dom';
 import styles from '../css/IssueDetail.module.css'
 import Recommend from '../components/Recommend';
@@ -22,6 +22,10 @@ function IssueDetail() {
       setDetailInfo(data)
       const result = await getUserByIdApi(data.userId)
       setIssueUser(result.data)
+      // 该问答的浏览数 +1
+      updateIssueApi(data._id, {
+        scanNumber: ++data.scanNumber
+      })
     }
     fetchData()
   }, [])
