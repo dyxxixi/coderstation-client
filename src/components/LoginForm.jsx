@@ -257,7 +257,7 @@ function LoginForm({ isModalOpen, closeModal }) {
             >记住我</Checkbox>
           </Form.Item>
 
-          <Form.Item
+          {/* <Form.Item
             wrapperCol={{
               offset: 5,
               span: 16,
@@ -273,7 +273,7 @@ function LoginForm({ isModalOpen, closeModal }) {
             <Button type="default" onClick={() => { form.resetFields(); setLoginInfo('') }}>
               重置
             </Button>
-          </Form.Item>
+          </Form.Item> */}
         </Form>
       </div>
     );
@@ -346,7 +346,7 @@ function LoginForm({ isModalOpen, closeModal }) {
             </Row>
           </Form.Item>
 
-          <Form.Item
+          {/* <Form.Item
             wrapperCol={{
               offset: 5,
               span: 16,
@@ -362,14 +362,14 @@ function LoginForm({ isModalOpen, closeModal }) {
             <Button type="default" onClick={() => { form.resetFields(); setRegisterInfo('') }}>
               重置
             </Button>
-          </Form.Item>
+          </Form.Item> */}
         </Form>
       </div>
     );
   }
 
   return (
-    <Modal title="登录/注册" open={isModalOpen} onOk={handleOk} onCancel={closeModal}>
+    <Modal title="登录/注册" open={isModalOpen} onOk={handleLogin} onCancel={closeModal}>
       <Radio.Group
         className={styles.radioGroup}
         value={value}
